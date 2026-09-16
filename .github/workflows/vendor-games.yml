@@ -1,0 +1,58 @@
+name: Vendor local game source
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  vendor:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download licensed MIT game sources
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p games
+          base="https://raw.githubusercontent.com/16Yongjin/html-games/master"
+          for file in tetris.html brick-breaker.html maze.html omok.html stack.html janggi.html; do
+            curl -fsSL "$base/$file" -o "games/$file"
+          done
+          curl -fsSL "$base/LICENSE" -o games/16Yongjin-LICENSE
+          cat > games/ATTRIBUTIONS.md <<'EOF'
+          # Local game sources
+
+          The following self-contained HTML games are vendored into this site from
+          https://github.com/16Yongjin/html-games
+
+          - tetris.html
+          - brick-breaker.html
+          - maze.html
+          - omok.html
+          - stack.html
+          - janggi.html
+
+          The upstream repository identifies the project as MIT licensed. The
+          original source files are kept as downloaded rather than rewritten.
+          See `16Yongjin-LICENSE` for the license text.
+          EOF
+
+      - name: Commit vendored files
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add games
+          if git diff --cached --quiet; then
+            echo "No game source changes."
+            exit 0
+          fi
+          git commit -m "Vendor local HTML5 game sources"
+          git push
