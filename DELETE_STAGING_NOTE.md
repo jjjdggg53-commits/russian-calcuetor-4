@@ -1,0 +1,1 @@
+Staging cleanup marker; no game content.
