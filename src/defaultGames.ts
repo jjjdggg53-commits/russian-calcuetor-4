@@ -1,4 +1,5 @@
-import { Game } from './types';
+import type { Game } from './types';
 
-// Existing bundled games have been removed. Add only games you are authorized to host.
+// This repository intentionally starts with no bundled games.
+// Add the game files/URLs you are authorized to publish to this catalog.
 export const defaultGames: Game[] = [];
