@@ -1,14 +1,15 @@
 # Local game sources
 
-These self-contained HTML5 game files are intended to be vendored into this site from the MIT-licensed repository:
+The following self-contained HTML games are vendored into this site from
 https://github.com/16Yongjin/html-games
 
-Files:
-- `tetris.html`
-- `brick-breaker.html`
-- `maze.html`
-- `omok.html`
-- `stack.html`
-- `janggi.html`
+- tetris.html
+- brick-breaker.html
+- maze.html
+- omok.html
+- stack.html
+- janggi.html
 
-The source repository states that its games are single-file HTML with embedded CSS and JavaScript and that the repository is MIT licensed. The upstream license text is included as `16Yongjin-LICENSE` when the vendor workflow runs.
+The upstream repository identifies the project as MIT licensed. The
+original source files are kept as downloaded rather than rewritten.
+See `16Yongjin-LICENSE` for the license text.
